@@ -1,0 +1,98 @@
+﻿<Page x:Class="WpfAppTasks.View.Pages.Tasks.Task2Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:dg2d="clr-namespace:Gu.Wpf.DataGrid2D;assembly=Gu.Wpf.DataGrid2D"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Task2Page">
+    <Page.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#7F000000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="Blue" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#663E3E3E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}" 
+                              VerticalAlignment="Center" Height="45">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Image Margin="-150,-150,-150,-150" Source="/Images/MainPageBack.jpeg" Stretch="Uniform"/>
+        <TextBlock Padding="10, 5, 10, 5" TextWrapping="Wrap" Margin="65,24,65,0" VerticalAlignment="Top"
+                   Background="#7F000000" Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="16">
+            <Run>Дана целочисленная прямоугольная матрица размера МxN. </Run>
+            <Run>Отсортировать каждый столбец с четным номером по не убыванию, </Run>
+            <Run>а каждый столбец с нечетным номером по не возрастанию.</Run>
+        </TextBlock>
+        <DataGrid x:Name="InputMatrixDataGrid" dg2d:ItemsSource.Array2D="{Binding InputMatrix, 
+                  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource 
+                  Mode=FindAncestor,AncestorType={x:Type Page}}}" BorderThickness="2"  
+                  HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White"  
+                  RowBackground="#00000000" RowHeight="30" Margin="65,136,0,121" 
+                  HeadersVisibility="None" Background="#99000000" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                  HorizontalScrollBarVisibility="Auto" 
+                  ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                  BorderBrush="Blue" Foreground="White" FontSize="18"
+                  FontFamily="Bahnschrift" HorizontalAlignment="Left" Width="320">
+        </DataGrid>
+        <Button x:Name="ToTasks" BorderThickness="2" Content="К заданиям" Margin="0,0,65,65" 
+                FontFamily="Bahnschrift" FontSize="16" Height="40" VerticalAlignment="Bottom"
+                Foreground="White" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
+                Width="171" Click="ToTasks_Click"/>
+        <Button x:Name="ButtonSolve" BorderThickness="2" Content="Сортировать" Margin="225,0,0,70"
+                FontFamily="Bahnschrift" FontSize="16" Height="40" VerticalAlignment="Bottom"
+                Foreground="White" RenderTransformOrigin="0.5,0.5" Click="ButtonSolve_Click"
+                HorizontalAlignment="Left" Width="160"/>
+        <Button x:Name="ButtonFillRandom" BorderThickness="2" Content="Случайная" Margin="65,0,0,70"
+                FontFamily="Bahnschrift" FontSize="16" Height="40" VerticalAlignment="Bottom"
+                Foreground="White" Click="ButtonFillRandom_Click" RenderTransformOrigin="0.5,0.5"
+                HorizontalAlignment="Left" Width="151"/>
+        <TextBlock Padding="10, 5, 10, 5" TextWrapping="Wrap" Text="Исходная матрица"
+                   Margin="65,101,0,0" VerticalAlignment="Top" Background="#7F000000"
+                   Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="16"
+                   RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="320"/>
+        <TextBlock Padding="10, 5, 10, 5" TextWrapping="Wrap" Text="Количество строк"
+                   Margin="0,101,65,0" VerticalAlignment="Top" Background="#7F000000"
+                   Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="16"
+                   RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="320"/>
+        <TextBlock Padding="10, 5, 10, 5" TextWrapping="Wrap" Text="Количество столбцов"
+                   Margin="0,135,65,0" VerticalAlignment="Top" Background="#7F000000"
+                   Foreground="White" FontFamily="Bahnschrift SemiBold" FontSize="16"
+                   RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="320"/>
+        <TextBox x:Name="RowNumber" Padding="0, 0, 10, 0" VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Right" Margin="0,101,65,0" TextWrapping="Wrap"
+                 Text="5" VerticalAlignment="Top" Height="29" HorizontalAlignment="Right"
+                 Width="129" FontSize="16" FontFamily="Bahnschrift" TextChanged="RowNumber_TextChanged"/>
+        <TextBox x:Name="ColumnNumber" Padding="0, 0, 10, 0" VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Right" Margin="0,135,65,0" TextWrapping="Wrap"
+                 Text="6" VerticalAlignment="Top" Height="29" HorizontalAlignment="Right"
+                 Width="129" FontSize="16" FontFamily="Bahnschrift" TextChanged="ColumnNumber_TextChanged"/>
+    </Grid>
+</Page>
